@@ -1,0 +1,26 @@
+generated: '2026-08-26'
+method: searched
+source: https://www.puzzlemed.com/
+description: >-
+  Puzzle Medical Devices documents no rate limits. The company publishes no API
+  reference or developer documentation. The one machine-callable surface on its host
+  — the Wix-provisioned site MCP at /_api/mcp — carries no published limits, and
+  returned no RateLimit-* or X-RateLimit-* response headers on the anonymous
+  tools/list and initialize calls made during this pass.
+limit_count: 0
+rate_limits: []
+response_headers_observed: []
+exhaustion_status_code: null
+docs: null
+evidence:
+- url: https://www.puzzlemed.com/_api/mcp
+  status: 200
+  note: >-
+    POST tools/list and POST initialize both returned 200 with no rate-limit
+    signalling headers present in the response.
+- url: https://www.puzzlemed.com/
+  status: 200
+  note: No developer documentation exists on the site in which limits could be published.
+note: >-
+  Honest zero. Any limits enforced on /_api/mcp would be Wix platform limits, which
+  Puzzle Medical neither sets nor publishes.

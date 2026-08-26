@@ -1,0 +1,26 @@
+generated: '2026-08-26'
+method: searched
+source: https://www.puzzlemed.com/
+description: >-
+  Puzzle Medical Devices publishes no plans, pricing, tiers or quotas of any kind.
+  The company is a clinical-stage medical device manufacturer whose product,
+  ModulHeart, is an investigational percutaneous heart pump under clinical study
+  with FDA Breakthrough Device Designation — it is not a commercially priced product
+  and there is no API, subscription or usage-metered offering to price.
+plan_count: 0
+plans: []
+currency: null
+pricing_url: null
+pricing_model: none-published
+evidence:
+- url: https://www.puzzlemed.com/
+  status: 200
+  note: >-
+    Full site is five pages (home, news, contact, team, joinus) per
+    https://www.puzzlemed.com/pages-sitemap.xml. No pricing page exists.
+- url: https://www.puzzlemed.com/pages-sitemap.xml
+  status: 200
+  note: Sitemap enumerates every page; none is a pricing or plans page.
+note: >-
+  Honest zero, not an unchecked field. Nothing about this company's stage or sector
+  implies published pricing should exist.

@@ -1,23 +1,97 @@
 aid: puzzle-medical-devices
 name: Puzzle Medical Devices
-description: 'Puzzle Medical Devices is a company surfaced via the API Evangelist harvest backlog (source:
-  secondary-market) and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Puzzle Medical Devices Inc. is a Montreal, Quebec based clinical-stage medical
+  device company founded in 2018 by Jade Doucet-Martineau, Gabriel Georges and
+  Francois Trudeau. It develops ModulHeart, a modular percutaneous mechanical
+  circulatory support pump for patients with advanced heart failure, anchored in the
+  descending aorta to reduce cardiac afterload and improve renal perfusion.
+  ModulHeart holds FDA Breakthrough Device Designation and has completed a
+  first-in-human study. The company is a hardware manufacturer, not a software
+  vendor - it publishes no developer program, API reference, SDK or machine-readable
+  contract. Its only agent-reachable surface is a Model Context Protocol endpoint
+  provisioned automatically by Wix, its website host, which serves public site
+  content rather than any product capability.
+image: https://static.wixstatic.com/media/fa79dc_887c5a16307349cbb8a24d8c75802651~mv2.jpg/v1/fill/w_2500,h_3333,al_c/fa79dc_887c5a16307349cbb8a24d8c75802651~mv2.jpg
 url: https://raw.githubusercontent.com/api-evangelist/puzzle-medical-devices/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: enrichment
 specificationVersion: '0.20'
 created: '2026-08-26'
 modified: '2026-08-26'
 tags:
 - Company
-apis: []
+- Medical Devices
+- Health Care
+- Cardiology
+- Heart Failure
+- Mechanical Circulatory Support
+- Medical Technology
+- Clinical Stage
+- Canada
+- Hardware
+apis:
+- aid: puzzle-medical-devices-site-mcp
+  name: Puzzle Medical Devices Site MCP
+  description: >-
+    An anonymous Model Context Protocol endpoint served from www.puzzlemed.com and
+    advertised by the company's own /llms.txt. It is the Wix platform Site Visitor
+    Assistant, provisioned by the website host rather than authored by Puzzle
+    Medical, and it exposes nine generic tools for reading public site content,
+    business details, and the Wix platform's own API documentation. It is not a
+    product, device or clinical API. Recorded because it is live, callable without
+    credentials, and self-identifies as belonging to this company.
+  humanURL: https://www.puzzlemed.com/llms.txt
+  baseURL: https://www.puzzlemed.com/_api/mcp
+  tags:
+  - MCP
+  - Agents
+  - Website
+  properties:
+  - type: MCPServer
+    url: mcp/puzzle-medical-devices-mcp.yml
+  - type: LLMsTxt
+    url: llms/puzzle-medical-devices-llms.txt
+  - type: RateLimits
+    url: rate-limits/puzzle-medical-devices-rate-limits.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/puzzle-medical-devices-domain-security.yml
 - type: Website
+  url: https://www.puzzlemed.com/
+- type: Blog
+  url: https://www.puzzlemed.com/news
+- type: BlogRSS
+  url: https://www.puzzlemed.com/blog-feed.xml
+- type: Support
+  url: https://www.puzzlemed.com/contact
+- type: Team
+  url: https://www.puzzlemed.com/team
+- type: Careers
+  url: https://www.puzzlemed.com/joinus
+- type: LinkedIn
+  url: https://ca.linkedin.com/company/puzzlemedicaldevices
+- type: SecondaryMarket
   url: https://www.nasdaqprivatemarket.com/
+- type: MCPServer
+  url: mcp/puzzle-medical-devices-mcp.yml
+- type: LLMsTxt
+  url: llms/puzzle-medical-devices-llms.txt
+- type: Conformance
+  url: conformance/puzzle-medical-devices-conformance.yml
+- type: Plans
+  url: plans/puzzle-medical-devices-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/puzzle-medical-devices-rate-limits.yml
+x-enrichment:
+  date: '2026-08-26'
+  status: enriched
+  artifacts_added: 8
+  pass: local-v1

@@ -1,0 +1,158 @@
+generated: '2026-08-26'
+method: probed
+source: https://www.puzzlemed.com/_api/mcp
+name: Puzzle Medical Devices Site MCP
+description: >-
+  A live, anonymous Model Context Protocol endpoint served from Puzzle Medical
+  Devices' own host (www.puzzlemed.com). It is the Wix platform "Site Visitor
+  Assistant" MCP, provisioned automatically by the company's website host, NOT a
+  first-party product API. It exposes generic site-content and Wix-platform tools
+  (business details, in-site search, Wix docs traversal, and a generic Wix API
+  caller) rather than anything specific to the ModulHeart device or to any Puzzle
+  Medical software product. It is recorded here because it is genuinely reachable
+  by an agent today, and because the endpoint self-identifies as belonging to this
+  company.
+
+deployment:
+  mode: remote
+  endpoint: https://www.puzzlemed.com/_api/mcp
+  install: null
+  package: null
+  auth: none
+  verified: probed
+
+x-evidence:
+  fetched: '2026-08-26'
+  url: https://www.puzzlemed.com/_api/mcp
+  http_status: 200
+  method: 'POST {"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+  content_type: application/json
+  advertised_by: https://www.puzzlemed.com/llms.txt
+  initialize_response:
+    protocolVersion: '2025-06-18'
+    server_name: 'Site Visitor Assistant for site "Puzzle Medical Devices" (https://www.puzzlemed.com/_api/mcp)'
+    server_version: 1.0.0
+    capabilities:
+    - tools.listChanged
+    - logging
+
+ownership:
+  verdict: confirmed
+  note: >-
+    The MCP `initialize` response names the site explicitly — serverInfo.name is
+    'Site Visitor Assistant for site "Puzzle Medical Devices"' and echoes the
+    www.puzzlemed.com endpoint — so the surface is served by, and identifies as,
+    a host this company controls. The IMPLEMENTATION is Wix's, shared across every
+    Wix-hosted site; the deployment and the content are Puzzle Medical's.
+
+platform:
+  provider: Wix
+  product: Wix Site MCP (Site Visitor Assistant)
+  first_party: false
+  docs: https://dev.wix.com/docs/develop-websites/articles/get-started/about-the-wix-site-mcp
+  note: >-
+    Generic across all Wix sites. Nothing in the tool surface is specific to Puzzle
+    Medical Devices' products; the site content returned by SearchInSite and
+    GetBusinessDetails is.
+
+transport: streamable-http
+protocol_version: '2025-06-18'
+tool_count: 9
+tools_manifest: mcp/puzzle-medical-devices-mcp-tools.json
+
+tools:
+- name: GetBusinessDetails
+  description: Retrieves business and site details such as timezone, email, phone, and address.
+  parameters: []
+  read_only: unset
+  category: site-content
+- name: SearchInSite
+  description: Searches the site for information.
+  parameters:
+  - searchTerm
+  read_only: unset
+  category: site-content
+- name: SearchSiteApiDocs
+  description: >-
+    Retrieves the API documentation for the Wix business solutions installed on this
+    site and informs the AI client how to use them.
+  parameters:
+  - searchTerm
+  read_only: unset
+  category: platform-docs
+- name: GenerateVisitorToken
+  description: Creates a visitor session and obtains a visitor access token for the site.
+  parameters: []
+  read_only: unset
+  category: auth
+- name: CallWixSiteAPI
+  description: >-
+    Calls Wix API methods on the site on a visitor's behalf (query site data, book,
+    start a purchase).
+  parameters:
+  - visitorToken
+  - url
+  - method
+  - body
+  read_only: unset
+  category: write-capable
+- name: ExecuteWixAPI
+  description: Executes Wix API code against the site; carries an explicit hasMutations flag.
+  parameters:
+  - code
+  - reason
+  - hasMutations
+  - sourceDocUrls
+  - visitorToken
+  read_only: false
+  category: write-capable
+- name: ReadFullDocsArticle
+  description: Fetches a complete article from the Wix developer documentation portal.
+  parameters:
+  - articleUrl
+  read_only: true
+  category: platform-docs
+- name: ReadFullDocsMethodSchema
+  description: Fetches the full request/response schema for a Wix API method.
+  parameters:
+  - articleUrl
+  - reason
+  read_only: true
+  category: platform-docs
+- name: BrowseWixRESTDocsMenu
+  description: Browses the Wix REST documentation menu tree.
+  parameters:
+  - menuUrl
+  - reason
+  read_only: true
+  category: platform-docs
+
+site_capabilities:
+- Blog App — list and query blog posts (reported by GetBusinessDetails)
+
+findings:
+- id: embedded-agent-directives
+  severity: note
+  summary: >-
+    Tool descriptions embed imperative agent instructions, not just descriptions.
+  detail: >-
+    Several tool `description` fields carry an <agent-mandatory-instructions> block
+    with directives in the second person ("YOU MUST READ AND FOLLOW ...", "A FAILURE
+    TO DO SO WILL RESULT IN ERRORS AND CRITICAL ISSUES") that attempt to set the
+    calling agent's goal and tool-call order. This is Wix platform text present on
+    every Wix site MCP, not something Puzzle Medical authored. It is recorded here as
+    an observation about the surface; the manifest is stored verbatim as data and the
+    directives were not acted on during this probe.
+- id: no-product-api
+  severity: note
+  summary: >-
+    This MCP is a website surface, not a device or product API.
+  detail: >-
+    Puzzle Medical Devices publishes no developer portal, no API reference, no
+    OpenAPI/GraphQL/AsyncAPI contract and no SDKs. An agent reaching this endpoint
+    can read the company's public site content; it cannot interact with the
+    ModulHeart device or any clinical data system.
+
+notes:
+- The endpoint requires no authentication and returns only public site information.
+- Advertised by the company's own /llms.txt, which is likewise Wix-generated.

@@ -1,0 +1,106 @@
+generated: '2026-08-26'
+method: probed
+source: https://www.puzzlemed.com/_api/mcp
+description: >-
+  Cross-cutting and domain-standard conformance for Puzzle Medical Devices. The only
+  machine-readable surface this company serves is the Wix-provisioned site MCP
+  endpoint, so the single positive assertion below is about MCP protocol handling,
+  observed directly in the initialize/tools list exchange. Everything else is an
+  honest negative.
+
+standards:
+- id: mcp
+  name: Model Context Protocol
+  conforms: true
+  version: '2025-06-18'
+  evidence:
+    url: https://www.puzzlemed.com/_api/mcp
+    http_status: 200
+    observed: >-
+      JSON-RPC 2.0 initialize returned protocolVersion 2025-06-18 with
+      capabilities.tools.listChanged and capabilities.logging; tools/list returned 9
+      tools, each with a draft-07 inputSchema.
+    fetched: '2026-08-26'
+  note: >-
+    Conformance is the Wix platform's, deployed on this company's host. Puzzle
+    Medical Devices did not author the server.
+
+- id: json-schema
+  name: JSON Schema draft-07
+  conforms: true
+  evidence:
+    url: https://www.puzzlemed.com/_api/mcp
+    http_status: 200
+    observed: >-
+      Every MCP tool inputSchema declares
+      $schema http://json-schema.org/draft-07/schema#.
+    fetched: '2026-08-26'
+
+- id: oauth2
+  name: OAuth 2.0
+  conforms: false
+  evidence:
+    url: https://www.puzzlemed.com/.well-known/oauth-authorization-server
+    http_status: 400
+    observed: No authorization server metadata; the MCP endpoint is anonymous.
+
+- id: oidc
+  name: OpenID Connect
+  conforms: false
+  evidence:
+    url: https://www.puzzlemed.com/.well-known/openid-configuration
+    http_status: 400
+    observed: No discovery document.
+
+- id: rfc9457
+  name: RFC 9457 Problem Details
+  conforms: false
+  evidence:
+    observed: No REST contract published, so no error envelope to assess.
+
+- id: rfc9116
+  name: RFC 9116 security.txt
+  conforms: false
+  evidence:
+    url: https://www.puzzlemed.com/.well-known/security.txt
+    http_status: 400
+    observed: Not served.
+
+domain_standards:
+  assessed: true
+  sector: medical devices — mechanical circulatory support (Class III implantable/percutaneous)
+  candidates_considered:
+  - id: hl7-fhir
+    conforms: false
+    reason: >-
+      No clinical data interface is published. FHIR would apply to a health IT or
+      clinical-data product; this company manufactures a percutaneous heart pump and
+      exposes no patient-data API.
+  - id: dicom
+    conforms: false
+    reason: No imaging surface published.
+  - id: ieee-11073
+    conforms: false
+    reason: >-
+      IEEE 11073 personal-health-device communication is the nearest applicable
+      standard for a device data interface, but Puzzle Medical publishes no device
+      telemetry or connectivity contract of any kind.
+  - id: udi-gudid
+    conforms: unknown
+    reason: >-
+      FDA UDI/GUDID device identification applies to marketed devices. ModulHeart
+      holds FDA Breakthrough Device Designation and is in clinical study, not
+      commercially marketed, so no GUDID record was sought or asserted here.
+  verdict: none-applicable
+  note: >-
+    REWARD-ONLY dimension. This company's market has no machine-readable interface
+    standard it is failing to meet, because it ships no software interface at all.
+    Recording an absence, not a deficiency.
+
+certifications_published: []
+compliance_pointer_emitted: false
+compliance_pointer_reason: >-
+  No trust center, no named certifications (SOC 2 / ISO 27001 / ISO 13485 / HIPAA /
+  FedRAMP) published on the company's five-page website, so no type Compliance
+  pointer is emitted. ISO 13485 is the standard a device manufacturer of this class
+  would typically hold, but it is not published on the site and was not asserted.

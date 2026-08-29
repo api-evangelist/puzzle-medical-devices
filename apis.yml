@@ -12,6 +12,17 @@ description: >-
   contract. Its only agent-reachable surface is a Model Context Protocol endpoint
   provisioned automatically by Wix, its website host, which serves public site
   content rather than any product capability.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://static.wixstatic.com/media/fa79dc_887c5a16307349cbb8a24d8c75802651~mv2.jpg/v1/fill/w_2500,h_3333,al_c/fa79dc_887c5a16307349cbb8a24d8c75802651~mv2.jpg
 url: https://raw.githubusercontent.com/api-evangelist/puzzle-medical-devices/refs/heads/main/apis.yml
 x-type: company

@@ -90,6 +90,9 @@ apis:
     url: llms/puzzle-medical-devices-llms.txt
   - type: RateLimits
     url: rate-limits/puzzle-medical-devices-rate-limits.yml
+  x-surface: platform-generated
+  x-platform: wix
+  x-platform-surface: site-mcp
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
